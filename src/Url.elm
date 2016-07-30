@@ -1,6 +1,4 @@
-module Url
-  ( resolve, join
-  ) where
+module Url exposing (resolve, join)
 
 {-| Url
 
@@ -11,15 +9,16 @@ module Url
 import Native.Url
 import String
 
+
 {-| Resolve
 -}
 resolve : List String -> String
 resolve paths =
-  Native.Url.resolve paths
+    Native.Url.resolve paths
 
 
 {-| Join
 -}
 join : List String -> String
 join paths =
-  String.join "/" paths
+    String.join "/" paths

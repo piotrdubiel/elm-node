@@ -1,56 +1,59 @@
-module Http
-  ( Error(..), get, serve, getURL, sendResponse, Request, Response
-  ) where
+module Http exposing (Error(..), get, serve, getURL, sendResponse, Request, Response)
 
 {-|
 
 @docs Error
 @docs get, serve, getURL, sendResponse
+@docs Request
+@docs Response
 
 -}
 
 import Task exposing (Task)
-
 import Native.Http
+
 
 {-| Error
 -}
-type Error = NetworkError String
+type Error
+    = NetworkError String
 
 
 {-| Request
 -}
-type Request = Request
+type Request
+    = Request
 
 
 {-| Response
 -}
-type Response = Response
+type Response
+    = Response
 
 
 {-| get
 -}
 get : String -> Task Error String
 get url =
-  Native.Http.get url
+    Native.Http.get url
 
 
 {-| serve
 -}
 serve : Int -> (Request -> Response -> Task x a) -> Task x ()
-serve prt taskFunction = 
-  Native.Http.serve prt taskFunction
+serve prt taskFunction =
+    Native.Http.serve prt taskFunction
 
 
 {-| getURL
 -}
 getURL : Request -> String
 getURL =
-  Native.Http.get_url
+    Native.Http.get_url
 
 
 {-| sendResponse
 -}
 sendResponse : Response -> String -> Task x ()
 sendResponse response s =
-  Task.succeed <| Native.Http.response_end response s
+    Task.succeed <| Native.Http.response_end response s
